@@ -1,7 +1,20 @@
-let promise = fetch("http://localhost:3001/api/v1/reservations").then(
+let getPromise = fetch("http://localhost:3001/api/v1/reservations").then(
   (res) => {
-    if (res.ok){
-    return res.json()}
-    });
+    if (res.ok) {
+      return res.json();
+    }
+  }
+);
 
-export { promise };
+const deletePromise = (id) => {
+  fetch(`http://localhost:3001/api/v1/reservations/${id}`, {
+    method: "DELETE",
+  }).then((res) => {
+    console.log(res)
+    if (res.ok) {
+      return res.json();
+    }
+  });
+};
+
+export { getPromise, deletePromise };
