@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import { getPromise, deletePromise } from '../apiCalls';
 import Resys from '../Resys/resys';
+import Form from '../Form/Form';
 
 function App() {
   const [resys, setResys] = useState([])
@@ -13,6 +14,10 @@ function App() {
   })
 }, [resys])
 
+function addResy(newResy) {
+  setResys([...resys, newResy]);
+}
+
   function cancelResy(id) {
     return (
     deletePromise(id).then((data) => setResys(data))
@@ -22,8 +27,7 @@ function App() {
   return (
     <div className="App">
       <h1 className='app-title'>Turing Cafe Reservations</h1>
-      <div className='resy-form'>
-      </div>
+      <Form addResy={addResy} />
       <Resys resys={resys} cancelResy={cancelResy} />
     </div>
   );
